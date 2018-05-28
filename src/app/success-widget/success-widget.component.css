@@ -1,0 +1,26 @@
+.ratio{
+  color:red;
+  background-color: cadetblue;
+}
+
+.container{
+  position: relative;
+  left: 5%;
+  top: 20px;
+  width: 90%;
+  background-color: black;
+}
+
+.chart_canvas {
+  padding:0;
+}
+
+.heading {
+  color: aliceblue;
+  justify-self: center;
+  font-size: xx-large;
+  padding: 20px 30px;
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
