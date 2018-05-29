@@ -13,3 +13,5 @@ __DEMO__ : http://heavy-task.online-profile.me/
 * Create new task using the _create task_ button on the top left corner of the main page.
 * After the task complete at the backend server the graphs are updates to show the latested changes.
 * we can clear all the task by clicking on _clear all stats_ on placed below the _create task_ button.
+
+__Note__: Works on chrome and firefox. 
