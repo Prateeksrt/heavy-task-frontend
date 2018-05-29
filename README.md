@@ -1,11 +1,15 @@
 # heavy-task-frontend
 Frontend which act as client for creating and displaying task stats.
 
-### Development server
+__DEMO__ : http://heavy-task.online-profile.me/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Stack
 
-### Build
+* This is an **Anugular** application which uses **chart.js** to display the different charts. 
+* The application in hosted at **aws S3 container**.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### How to user
 
+* Create new task using the _create task_ button on the top left corner of the main page.
+* After the task complete at the backend server the graphs are updates to show the latested changes.
+* we can clear all the task by clicking on _clear all stats_ on placed below the _create task_ button.
