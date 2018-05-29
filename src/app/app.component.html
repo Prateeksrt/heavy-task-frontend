@@ -1,3 +1,11 @@
-<div class="container">
+<div class="container" *ngIf="taskStats">
+  <app-info-widget (refreshed)="onRefresh()" [taskStats]="taskStats"></app-info-widget>
+  <app-response-graph [taskStats]="taskStats"></app-response-graph>
   <app-success-widget [taskStats]="taskStats"></app-success-widget>
+  <div [ngClass]='{"hang-button create":true, "disable": disable}' (click)="createEvent()">
+    <p class="text">Create Task!</p>
+  </div>
+  <div [ngClass]='{"hang-button delete":true, "disable": disable}' (click)="clearStats()">
+    <p class="text">Clear all stats!</p>
+  </div>
 </div>

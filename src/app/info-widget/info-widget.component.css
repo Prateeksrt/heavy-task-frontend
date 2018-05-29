@@ -1,0 +1,22 @@
+.container{
+  position: relative;
+  left: 5%;
+  width: 90%;
+  background-color: black;
+  margin-bottom: 1.5em;
+  min-height: 4em;
+}
+
+.info {
+  color: aliceblue;
+  font-size: 1em;
+  padding-left: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: inline-block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.task {
+  float: right;
+}

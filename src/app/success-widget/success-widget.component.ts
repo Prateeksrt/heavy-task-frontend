@@ -1,38 +1,54 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {Chart} from 'chart.js';
 import {TaskStats} from '../task-stats';
+import {FAILURE, FAILURE_BORDER, SUCCESS, SUCCESS_BORDER} from '../../assets/colors';
+import {OnChanges} from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-success-widget',
   templateUrl: './success-widget.component.html',
   styleUrls: ['./success-widget.component.css']
 })
-export class SuccessWidgetComponent implements OnInit {
+export class SuccessWidgetComponent implements OnInit, OnChanges {
 
   constructor() {
   }
 
   chart: any;
-  data: any;
 
   @Input() taskStats: TaskStats;
 
-  ngOnInit(): void {
-    setTimeout(() => this.createChart(), 0);
+  private static createOptions() {
+    return {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          fontSize: 20,
+          padding: 30
+        }
+      },
+      layout: {
+        padding: {
+          top: 50,
+          bottom: 50
+        }
+      }
+    };
   }
 
-  createChart() {
-    this.data = {
+  private static createData(taskStats) {
+    return {
       datasets: [{
         data: [
-          this.taskStats.numberOfSuccess,
-          this.taskStats.numberOfFailure
+          taskStats.numberOfSuccess,
+          taskStats.numberOfFailure
         ],
         backgroundColor: [
-          '#4CAF50',
-          '#ff1133',
+          SUCCESS,
+          FAILURE,
         ],
-        borderColor: ['#454341', '#454341']
+        borderColor: [SUCCESS_BORDER, FAILURE_BORDER]
       }],
 
       labels: [
@@ -40,23 +56,51 @@ export class SuccessWidgetComponent implements OnInit {
         'Failure'
       ]
     };
+  }
+
+  private static isContentReady(taskStats) {
+    return !!taskStats.numberOfSuccess
+      || !!taskStats.numberOfFailure;
+  }
+
+  ngOnInit(): void {
+    this.createChart();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.taskStats.firstChange) {
+      this.updateChart(changes.taskStats.currentValue);
+    }
+  }
+
+  updateChart(newTaskStats: TaskStats) {
+    if (!SuccessWidgetComponent.isContentReady(newTaskStats)) {
+      this.chart.destroy();
+      this.chart = null;
+    } else {
+      if (this.chart) {
+        this.chart.data = SuccessWidgetComponent.createData(newTaskStats);
+        this.chart.update();
+      } else {
+        this.taskStats = newTaskStats;
+        this.createChart();
+      }
+    }
+  }
+
+  createChart() {
+    if (!SuccessWidgetComponent.isContentReady(this.taskStats)) {
+      this.chart = null;
+      return;
+    }
+
+    const data = SuccessWidgetComponent.createData(this.taskStats);
+    const options = SuccessWidgetComponent.createOptions();
+
     this.chart = new Chart('canvas', {
       type: 'doughnut',
-      data: this.data,
-      options: {
-        legend: {
-          display: true,
-          position: 'bottom'
-        },
-        layout: {
-          padding: {
-            top: 50,
-            bottom: 50,
-            left: 0,
-            right: 0,
-          }
-        }
-      }
+      data: data,
+      options: options
     });
   }
 }

@@ -1,16 +1,3 @@
-.container{
-  position: relative;
-  left: 5%;
-  width: 90%;
-  background-color: black;
-  margin-bottom: 2.5em;
-  padding-top: 2em;
-}
-
-.chart_canvas {
-  max-height: 90%;
-}
-
 .heading {
   color: aliceblue;
   font-size: 2em;
@@ -33,4 +20,3 @@
 .error-container {
   margin-top: 2em;
 }
-

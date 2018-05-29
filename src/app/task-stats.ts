@@ -4,4 +4,6 @@ export class TaskStats {
   numberOfSuccess: number;
   numberOfFailure: number;
   lastChecked: any;
+  lastTenResponse: Array<number>;
+  lastUpdated: any;
 }

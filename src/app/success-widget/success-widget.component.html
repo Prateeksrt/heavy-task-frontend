@@ -1,4 +1,5 @@
 <div class="container">
   <span class="heading">Task success ratio</span>
   <canvas class="chart_canvas" id="canvas" [hidden]="!chart">{{ chart }}</canvas>
+  <app-error-place-holder [hidden]="chart"></app-error-place-holder>
 </div>
